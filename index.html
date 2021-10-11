@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Reabertura dos escritórios - FCâmara</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+
+<body>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet'>
+  <script src="https://kit.fontawesome.com/8a0e7481c9.js" crossorigin="anonymous"></script>
+
+  <header class="cabecalho">
+  
+    <div class="logo-pagina">
+      <!--       [Logo da empresa] -->
+      Grupo FCâmara
+    </div>
+
+    <div class="menu">
+      <button onclick="showPopup('consulta-geral')" id="">Consultar agendamentos</button>
+	  <button onclick="showPopup('cancelamento')" id="">Cancelamento</button>
+    </div> <!-- fecha <div class="menu"> -->
+	
+  </header>
+
+  <main>
+
+    <div class="container">
+	
+      <!-- Bloco esquerdo (texto) INICIO -->
+        <div class="info">
+          <center><img src="https://i.ibb.co/FxkSbh4/fcamara-logo.png"></center>
+          <h1>Reabertura dos escritórios</h1>
+          <p>Depois de quase 2 anos de home-office, estamos prontos para a reabertura da empresa, planejada com muito cuidado e segurança.</p>
+          <p>Estamos muito felizes com a novidade, mas precisaremos organizá-la para garantir a segurança de todos os colaboradores.</p>
+          <p>Para isso, precisamos deixar todas as informações do processo bem claras.</p>
+
+          <ul>
+            <li><strong>O retorno aos escritórios é opcional.</strong> Aqueles que não se sentirem confortáveis para voltar poderão continuar trabalhando remotamente.</li>
+            <li>Os escritórios voltarão a ficar abertos no horário das 8h às 18h.</li>
+            <li>O retorno ao escritório só é possível através de um <strong>sistema de agendamento</strong> (formulário ao lado), onde os <span style="color:#fc6027;">#SangueLaranjas</span> poderão optar qual escritório ir, além de escolher data e também a estação de trabalho demarcada com um número.</li>
+            <li>Será medida a temperatura ao chegar no escritório.</li>
+            <li>Todos os consultores deverão usar máscaras dentro das acomodações dos escritórios.</li>
+            <li>Nas mesas existem adesivos sinalizando onde os <span style="color:#fc6027;">#SangueLaranjas</span> devem sentar, para que haja o distanciamento necessário.</li>
+            <li>Pessoas que estiverem sentindo algum sintoma não devem ir trabalhar presencialmente, a indicação é para que permaneçam em casa.</li>
+            <li>Os escritórios só podem comportar até 40% dos consultores, conforme a legislação.</li>
+          </ul>
+        </div> <!-- fecha <div class="info"> -->
+		<!-- Bloco esquerdo (texto) FIM -->
+
+
+		<!-- Bloco direito (formulario) INICIO -->
+        <div class="form-agendamento">
+          <div class="formulario">
+            <h2>Agendamento</h2>
+            <b>Escritório:</b><br>
+            <input type='radio' onclick='liberaCodCad()' name='escritorio' id='saopaulo' value='saopaulo'>
+            <label for='saopaulo'>São Paulo</label><input type='radio' onclick='liberaCodCad()' name='escritorio' id='santos' value='santos'>
+            <label for='santos'>Santos</label><br>
+
+            <label for="codCad"><b>Código de cadastro do consultor:</b></label><br>
+            <input type="number" placeholder="Cód. de cadastro do consultor" id="codCad" class="" oninput="verificaCodCad('agend')" disabled></input><br>
+            <span style="color: white; font-weight:bold;" id="aviso-codCad"></span>
+            <br>
+
+            <label><b>Nome do consultor:</b></label><br>
+            <input type="text" id="nome" class="" value="" readonly disabled></input>
+            <br>
+            <div id="campoData">
+              <label for="dia"><b>Data:</b></label><br>
+              <input type="date" id="dia" oninput="selecionaDia()" class="campoData" disabled></input>
+            </div>
+            <br>
+
+            <div id="mesas-disp">
+              <!-- botões com mesas disponíveis -->
+            </div> <!-- fecha <div id="mesas-disp"> -->
+            <br>
+
+            <button onclick="agendamento()" id="btnAgendar" disabled>Agendar</button> 
+			<button onclick="zerarForm()" id="btnZerar">Limpar</button>
+          </div> <!-- fecha <div class="formulario"> -->
+
+          <div id="mensagem-confirm" class="popup-fundo">
+            <div class="mensagem-confirm">
+              <span style="text-align:center;"><i class="fas fa-check-circle fa-5x" style="color:#fc6027;"></i></span>
+              <h3>Seu agendamento foi concluído com sucesso!</h3>
+              <p>Revise as informações do seu agendamento:</p>
+              <div id="confirm-agend">
+                <!--  <p>06 de Outubro de 2021</p>
+                      <p>Consultor: Maria Oliveira Santos Neves</p>
+                      <p>Escritório de São Paulo - Estação de trabalho: 14</p> -->
+              </div>
+              <button onclick="hidePopup('mensagem-confirm')">FECHAR (&times;)</button>
+            </div> <!-- fecha <div class="mensagem-confirm"> -->
+          </div> <!-- fecha <div id="mensagem-confirm" class="popup-fundo"> -->
+
+        </div> <!-- fecha <div class="form-agendamento"> -->
+      <!-- Bloco direito (formulario) FIM -->
+
+
+    </div> <!-- fecha <div class="container"> -->
+
+  </main>
+
+  <div id="consulta-geral" class="popup-fundo">
+    <div class="consulta-geral">
+      <!-- ABAS -->
+      <div class="aba-consulta">
+        <button class="tablinks" id="consultaPrincipal" onclick="abrirConsulta('consultaMes')">Consulta geral por mês</button>
+        <button class="tablinks" onclick="abrirConsulta('consultaCodCad')">Consulta por cód. de cadastro</button>
+        <button onclick="hidePopup('consulta-geral')" id="btnFechar">FECHAR (&times;)</button>
+      </div>
+
+      <!-- Conteúdo -->
+      <div id="consultaMes" class="tabcontent">
+        <h2>Consulta geral</h2>
+
+        <div class="formulario">
+          <b>Escritório:</b><br>
+          <input type='radio' onclick='menuConsultaAgend("saopaulo")' name='consulta-escritorio' id='consulta-saopaulo' value='saopaulo'>
+          <label for='consulta-saopaulo'>São Paulo</label>
+          <input type='radio' onclick='menuConsultaAgend("santos")' name='consulta-escritorio' id='consulta-santos' value='santos'>
+          <label for='consulta-santos'>Santos</label><br>
+
+          <select id="consulta-menu" onchange="imprimirAgend(this.value)">
+            <option selected disabled value="">Selecione um escritório para consulta</option>
+            <!-- Aqui vão entrar as opções para seleção através do Javascript -->
+          </select>
+          <br>
+          <div id="imprimir-agend"></div>
+        </div>
+
+      </div> <!-- fecha <div id="consultaMes" class="tabcontent"> -->
+
+      <div id="consultaCodCad" class="tabcontent">
+        <h2>Consulta por código de cadastro</h2>
+
+        <div class="formulario">
+          <b>Escritório:</b><br>
+          <input type='radio' name='escritorio-consult' id='saopaulo-consult' value='saopaulo'>
+          <label for='saopaulo-consult'>São Paulo</label><input type='radio' name='escritorio-consult' id='santos-consult' value='santos'>
+          <label for='santos-consult'>Santos</label><br>
+
+          <label for="codCad-consult">Código de cadastro do consultor:</label><br>
+          <input type="number" placeholder="Cód. de cadastro do consultor" id="codCad-consult" class="" oninput="verificaCodCad('consult')"></input><span style="color: red;" id="aviso-codCad-consult"></span>
+          <br>
+
+          Nome do consultor:<br>
+          <input type="text" id="nome-consult" class="" value="" readonly disabled></input>
+          <br>
+          <button onclick="consultaCodCad('consult')" id="btnConsultar" disabled>Consultar</button>
+
+          <div id="consulta-consult"><!--Agendamentos feitos aparecem aqui--></div>
+
+        </div>
+      </div> <!-- fecha <div id="consultaCodCad" class="tabcontent"> -->
+
+      <!-- Fim do Conteúdo ABAS -->
+    </div> <!-- fecha <div class="consulta-geral"> -->
+  </div> <!-- fecha <div id="consulta-geral" class="popup-fundo"> -->
+
+  <div id="cancelamento" class="popup-fundo">
+    <div class="cancelamento">
+      <h2>Cancelar agendamento <a onclick="hidePopup('cancelamento')" class="fechar" style="float: right;">&times;</a></h2>
+
+      <div class="formulario">
+
+        <b>Escritório:</b><br>
+        <input type='radio' name='escritorio-cancel' id='saopaulo-cancel' value='saopaulo'>
+        <label for='saopaulo-cancel'>São Paulo</label><input type='radio' name='escritorio-cancel' id='santos-cancel' value='santos'>
+        <label for='santos-cancel'>Santos</label><br>
+
+        <label for="codCad-cancel"><b>Código de cadastro do consultor:</b></label><br>
+        <input type="number" placeholder="Cód. de cadastro do consultor" id="codCad-cancel" class="" oninput="verificaCodCad('cancel')"></input><br>
+        <span style="color: red;" id="aviso-codCad-cancel"></span>
+        <br>
+
+        <label><b>Nome do consultor:</b></label><br>
+        <input type="text" id="nome-cancel" class="" value="" readonly disabled></input>
+        <br>
+        <button onclick="consultaCodCad('cancel')" id="btnCancelar" disabled>Consultar</button>
+
+        <div id="consulta-cancel"></div><br>
+
+      </div> <!-- <div class="formulario"> -->
+
+      <button onclick="hidePopup('cancelamento')">FECHAR (&times;)</button>
+    </div> <!-- <div class="cancelamento"> -->
+  </div> <!-- fecha <div id="cancelamento" class="popup-fundo"> -->
+  
+  
+  <div class="rodape">
+  Modelo de Landing Page feito em 2021 para o processo seletivo do Programa de Formação da FCâmara - <a href="https://github.com/lis-ds/landingpage-fcamara2021" target="_blank">GitHub</a>
+  </div> <!-- fecha <div class="rodape"> -->
+
+
+  <script  src="./script.js"></script>
+  <script  src="./script_pag.js"></script>
+
+</body>
+</html>
