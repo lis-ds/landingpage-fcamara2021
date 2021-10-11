@@ -3,7 +3,9 @@ Landing Page desenvolvida para o desafio do Programa de Formação 2021 da FCâm
 
 <hr>
 
-Um modelo de Landing Page apresentando as informações pertinentes aos consultores sobre os cuidados do processo de reabertura dos escritórios, e um formulário de agendamento para o retorno a um dos escritórios.
+<h3>Principal</h3>
+
+<p>Um modelo de Landing Page apresentando as informações pertinentes aos consultores sobre os cuidados do processo de reabertura dos escritórios, e um formulário de agendamento para o retorno a um dos escritórios.</p>
 <p align="center">
 <img src="https://i.ibb.co/6sJ73MY/main2.png">
 </p>
@@ -17,6 +19,7 @@ Um modelo de Landing Page apresentando as informações pertinentes aos consulto
 </p>
   
 <hr>
+<h3>Consulta e cancelamento</h3>
 <p>Adicionalmente, no topo da página há mais duas opções.</p>
 <p align="center">
 <img src="https://i.ibb.co/WtxxWjJ/menu.png">
@@ -35,6 +38,8 @@ Um modelo de Landing Page apresentando as informações pertinentes aos consulto
 </p>
 
 <hr>
+<h3>Responsividade</h3>
+
 <p>Para facilitar o acesso à página, foi feita uma responsividade simples para melhor visualização através de um dispositivo móvel.</p>
 <p align="center">
 <img src="https://i.ibb.co/rvwYr0D/tela1.png">&nbsp&nbsp&nbsp<img src="https://i.ibb.co/Jnbtn6d/tela4.png"><br>
